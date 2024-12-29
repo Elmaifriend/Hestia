@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             Codigo::factory(10)->create()->each(function(Codigo $codigo) use ( $usuario ){
                 $codigo->usuario_id = $usuario->id;
 
-                Visitante::factory(10)->create()->each(function( Visitante $visitante ) use ( $codigo ){
+                Visitante::factory(1)->create()->each(function( Visitante $visitante ) use ( $codigo ){
                     $visitante->codigo_id = $codigo->id;
                 });
 
