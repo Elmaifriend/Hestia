@@ -11,6 +11,7 @@ class Usuario extends Authenticatable
     /** @use HasFactory<\Database\Factories\UsuarioFactory> */
     use HasFactory, HasApiTokens;
     protected $fillable = ["nombre", "apellido", "telefono", "rol", "correo", "contrasena" ];
+    protected $hidden = ["contrasena"];
 
     public function codigos(){
         return $this->hasMany( Codigo::class, "usuario_id");
