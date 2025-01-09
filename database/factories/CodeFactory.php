@@ -9,7 +9,7 @@ use App\Models\Visitante;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Codigo>
  */
-class CodigoFactory extends Factory
+class CodeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class CodigoFactory extends Factory
     public function definition(): array
     {
         return [
-            "usuario_id" => Usuario::inRandomOrder()->first()->id,
+            "usuario_id" => User::inRandomOrder()->first()->id,
             "codigo" => fake()->uuid(),
             "asunto" => fake()->sentence(),
             "numero_visitantes" => fake()->randomDigitNotNull(),

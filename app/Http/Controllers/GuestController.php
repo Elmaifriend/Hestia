@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Codigo;
+use App\Models\Visitante;
 use Illuminate\Http\Request;
 
-class CodigoController extends Controller
+class GuestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class CodigoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Codigo $codigo)
+    public function show(Visitante $visitante)
     {
         //
     }
@@ -42,7 +42,7 @@ class CodigoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Codigo $codigo)
+    public function edit(Visitante $visitante)
     {
         //
     }
@@ -50,7 +50,7 @@ class CodigoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Codigo $codigo)
+    public function update(Request $request, Visitante $visitante)
     {
         //
     }
@@ -58,7 +58,7 @@ class CodigoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Codigo $codigo)
+    public function destroy(Visitante $visitante)
     {
         //
     }

@@ -8,7 +8,7 @@ use App\Models\Codigo;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Visitante>
  */
-class VisitanteFactory extends Factory
+class GuestFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class VisitanteFactory extends Factory
             "apellido" => fake()->lastName(),
             "telefono" => fake()->phoneNumber(),
             "correo" => fake()->safeEmail(),
-            "codigo_id" => Codigo::inRandomOrder()->first()->id
+            "codigo_id" => Code::inRandomOrder()->first()->id
         ];
     }
 }

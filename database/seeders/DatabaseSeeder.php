@@ -4,9 +4,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Usuario;
-use App\Models\Visitante;
-use App\Models\Codigo;
+use App\Models\User;
+use App\Models\Guest;
+use App\Models\Code;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Usuario::factory(10)->create()->each(function(Usuario $usuario){
+        User::factory(10)->create()->each(function(User $user){
 
-            Codigo::factory(10)->create()->each(function(Codigo $codigo) use ( $usuario ){
-                $codigo->usuario_id = $usuario->id;
+            Code::factory(10)->create()->each(function(Code $code) use ( $user ){
+                $code->user_id = $user->id;
 
-                Visitante::factory(1)->create()->each(function( Visitante $visitante ) use ( $codigo ){
-                    $visitante->codigo_id = $codigo->id;
+                Guest::factory(1)->create()->each(function( Guest $guest ) use ( $code ){
+                    $guest->code_id = $code->id;
                 });
 
             });
