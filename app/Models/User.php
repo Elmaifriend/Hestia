@@ -10,10 +10,10 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UsuarioFactory> */
     use HasFactory, HasApiTokens;
-    protected $fillable = ["nombre", "apellido", "telefono", "rol", "correo", "contrasena" ];
-    protected $hidden = ["contrasena"];
+    protected $fillable = ["name", "last_name", "cel_phone", "rol", "email", "password" ];
+    protected $hidden = ["password"];
 
-    public function codigos(){
-        return $this->hasMany( Codigo::class, "usuario_id");
+    public function codes(){
+        return $this->hasMany( Code::class, "usuario_id");
     }
 }

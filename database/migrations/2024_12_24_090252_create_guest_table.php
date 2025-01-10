@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guest', function (Blueprint $table) {
+        Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("codigo_id")->index();
-            $table->string("nombre");
-            $table->string("apellido");
-            $table->string("telefono");
-            $table->string("correo");
+            $table->unsignedBigInteger("code_id")->index();
+            $table->string("name");
+            $table->string("last_name");
+            $table->string("cell_phone");
+            $table->string("email");
             $table->timestamps();
 
-            $table->foreign("codigo_id")->references("id")->on("codigos")->cascadeOnDelete();
+            $table->foreign("code_id")->references("id")->on("codes")->cascadeOnDelete();
         });
     }
 

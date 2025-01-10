@@ -9,20 +9,27 @@ class Code extends Model
 {
     /** @use HasFactory<\Database\Factories\CodigoFactory> */
     use HasFactory;
-    protected $fillable = ["usuario_id", "codigo", "asunto", "numero_visitantes",
-        "entrada", "descripcion", "status"];
+    protected $fillable = ["user_id", "code", "subject", "visitants_number",
+        "entry", "description", "status"];
 
-    public function usuario(){
-        return $this->belongsTo(Usuario::class, "usuario_id");
+    public function user(){
+        return $this->belongsTo(User::class, "user_id");
     }
 
-    public function visitantes(){
-        return $this->hasMany( Visitante::class, "codigo_id" );
+    public function guest(){
+        return $this->hasMany( Guest::class, "code_id" );
     }
 
-    public function aprobar( ){
+    public function checkEntry( ){
         if( $this->status != "Aprobado" ){
             $this->status = "Aprobado";
+            $this->save();
+        }
+    }
+
+    public function checkExit(){
+        if( $this->status != "Terminado"){
+            $this->status = "Terminado";
             $this->save();
         }
     }

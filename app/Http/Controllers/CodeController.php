@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Codigo;
+use App\Models\Code;
 use Illuminate\Http\Request;
 
 class CodeController extends Controller
@@ -34,7 +34,7 @@ class CodeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Codigo $codigo)
+    public function show(Code $code)
     {
         //
     }
@@ -42,7 +42,7 @@ class CodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Codigo $codigo)
+    public function edit(Code $code)
     {
         //
     }
@@ -50,7 +50,7 @@ class CodeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Codigo $codigo)
+    public function update(Request $request, Code $code)
     {
         //
     }
@@ -58,7 +58,7 @@ class CodeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Codigo $codigo)
+    public function destroy(Code $code)
     {
         //
     }

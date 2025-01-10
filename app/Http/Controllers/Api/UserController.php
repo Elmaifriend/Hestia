@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
 
 class UserController extends Controller
 {
@@ -65,7 +65,7 @@ class UserController extends Controller
     }
 
     public function obtenerCorreos(){
-        $correos = Usuario::all(["correo"]);
+        $correos = User::all(["correo"]);
 
         return response()->json([
             "correos" => $correos,

@@ -9,6 +9,7 @@ use App\Models\Guest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Json;
 
 class CodeController extends Controller
 {
@@ -46,7 +47,10 @@ class CodeController extends Controller
         if( $codeValidator->fails() || $guestValidator->fails() ){
             return response()->json([
                 "message" => "The data is incomplete",
-                "errores" => [ $codeValidator->errors(), $guestValidator->errors()]
+                "errores" => [ 
+                    "code" => $codeValidator->errors(),
+                    "guest" => $guestValidator->errors()
+                ]
             ]);
         }
 
@@ -66,21 +70,22 @@ class CodeController extends Controller
         $code->guests()->save($guest);
 
         return response()->json([
-            "message" => "code generado correctamente"
+            "message" => "codigo generado correctamente",
+            "code" => $code
         ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, code $code){
+    public function show(Request $request, Code $code){
 
         $user = $request->user();
 
         if( $user->id !== $code->user_id ){
             return response()->json([
-                "message" => "You do not have access to this information"
-            ]);
+                "message" => "No tienes acceso a esta informacion"
+            ], 401); //Unauthorized
         }
 
         $guest = Guest::where("code_id", "=", $code->id )->first();
@@ -136,13 +141,14 @@ class CodeController extends Controller
 
         $guestData = $guestValidator->validated();
         $guestData["code_id"] = $code->id;
-        $visitante = Visitante::create($guestData);
+        $visitante = Guest::create($guestData);
 
 
         $code->guest()->save($visitante);
 
         return response()->json([
-            "message" => "code actualizado correctamente"
+            "message" => "code actualizado correctamente",
+            "code" => $code
         ], 201);
     }
 
@@ -151,6 +157,15 @@ class CodeController extends Controller
      */
     public function destroy(code $code)
     {
+
+        $user = request()->user();
+
+        if( $code->user_id !== $user->id ){
+            return response()->json([
+                "message" => "No tienes acceso a esta informacion"
+            ]);
+        }
+
         $code->delete();
 
         return response()->json([
@@ -159,15 +174,43 @@ class CodeController extends Controller
     }
 
 
-    public function escanear( Request $request ){
+    public function scanCode( Request $request ){
 
-        $codeEscaneado = $request->input("code");
+        $scannedCode = $request->input("code");
 
-        $code = code::where("code", $codeEscaneado)->first();
-        $code->aprobar();
+        $code = code::where("code", $scannedCode)->first();
+
+        switch( $code->status ){
+            case "Pendiente":
+                $code->checkEntry();
+                $message = "Codigo aprobado correctamente";
+                $httpStatus = 201;
+                break;
+            
+            case "Aprobado":
+                $code->checkExit();
+                $message = "Salida registrada correctamente";
+                $httpStatus = 201;
+                break;
+            
+            case "Terminado":
+                $message = "Este codigo ya fue utilizado";
+                $httpStatus = 301;
+                break;
+
+            case "Cancelado":
+                $message = "Este codigo fue cancelado";
+                $httpStatus = 301;
+                break;
+            
+            default:
+                $message = "Codigo no valido";
+                $httpStatus = 301;
+                break;
+        }
 
         return response()->json([
-            "message" => "code escaneado correctamente"
-        ]);
+            "message" => $message
+        ], $httpStatus);
     }
 }

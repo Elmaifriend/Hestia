@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Usuario;
-use App\Models\Visitante;
+use App\Models\User;
+use App\Models\Guest;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Codigo>
@@ -19,12 +19,12 @@ class CodeFactory extends Factory
     public function definition(): array
     {
         return [
-            "usuario_id" => User::inRandomOrder()->first()->id,
-            "codigo" => fake()->uuid(),
-            "asunto" => fake()->sentence(),
-            "numero_visitantes" => fake()->randomDigitNotNull(),
-            "entrada" => fake()->dateTimeBetween("-6 months"),
-            "descripcion" => fake()->paragraph(2),
+            "user_id" => User::inRandomOrder()->first()->id,
+            "code" => fake()->uuid(),
+            "subjec" => fake()->sentence(),
+            "visitants_number" => fake()->randomDigitNotNull(),
+            "entry" => fake()->dateTimeBetween("-6 months"),
+            "description" => fake()->paragraph(2),
             "status" => "Pendiente",
         ];
     }

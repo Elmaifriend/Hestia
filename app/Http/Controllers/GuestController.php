@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Visitante;
+use App\Models\Guest;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -34,7 +34,7 @@ class GuestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Visitante $visitante)
+    public function show(Guest $guest)
     {
         //
     }
@@ -42,7 +42,7 @@ class GuestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Visitante $visitante)
+    public function edit(Guest $guest)
     {
         //
     }
@@ -50,7 +50,7 @@ class GuestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Visitante $visitante)
+    public function update(Request $request, Guest $guest)
     {
         //
     }
@@ -58,7 +58,7 @@ class GuestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Visitante $visitante)
+    public function destroy(Guest $guest)
     {
         //
     }

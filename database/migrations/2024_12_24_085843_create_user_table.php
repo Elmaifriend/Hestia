@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
-            $table->string("apellido");
-            $table->string("telefono");
-            $table->string("correo");
-            $table->string("contrasena");
-            $table->enum("rol", ["Administrador", "Residente", "Guardia" ] );
+            $table->string("name");
+            $table->string("last_name");
+            $table->string("cell_phone");
+            $table->string("email");
+            $table->string("password");
+            $table->enum("rol", ["Administrador", "Residente", "Guardia", "Staff" ] );
             $table->timestamps();
         });
     }

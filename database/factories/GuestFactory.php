@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Codigo;
+use App\Models\Code;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Visitante>
@@ -18,11 +18,11 @@ class GuestFactory extends Factory
     public function definition(): array
     {
         return [
-            "nombre" => fake()->name(),
-            "apellido" => fake()->lastName(),
-            "telefono" => fake()->phoneNumber(),
-            "correo" => fake()->safeEmail(),
-            "codigo_id" => Code::inRandomOrder()->first()->id
+            "name" => fake()->name(),
+            "last_name" => fake()->lastName(),
+            "cell_phone" => fake()->phoneNumber(),
+            "email" => fake()->safeEmail(),
+            "code_id" => Code::inRandomOrder()->first()->id
         ];
     }
 }

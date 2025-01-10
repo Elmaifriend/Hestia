@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("usuario_id")->index();
-            $table->string("codigo");
-            $table->string("asunto");
-            $table->tinyInteger("numero_visitantes");
-            $table->dateTime("entrada");
+            $table->unsignedBigInteger("user_id")->index();
+            $table->string("code");
+            $table->string("subject");
+            $table->tinyInteger("visitors_number");
+            $table->dateTime("scheduled");
+            $table->dateTime("entry_check");
+            $table->datetimes("exit_check");
             $table->tinyText("descripcion");
-            $table->enum("status", ["Aprobado", "Pendiente", "Cancelado" ] );
+            $table->enum("status", ["Aprobado", "Pendiente", "Terminado", "Cancelado" ] );
             $table->timestamps();
 
-            $table->foreign("usuario_id")->references("id")->on("usuarios")->cascadeOnDelete();
+            $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
         });
     }
 
