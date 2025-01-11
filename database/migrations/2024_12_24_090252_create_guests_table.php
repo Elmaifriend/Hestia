@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("code_id")->index();
             $table->string("name");
             $table->string("last_name");
-            $table->string("cell_phone");
+            $table->string("phone_number");
             $table->string("email");
             $table->timestamps();
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guest');
+        Schema::dropIfExists('guests');
     }
 };

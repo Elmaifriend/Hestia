@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UsuarioFactory> */
     use HasFactory, HasApiTokens;
-    protected $fillable = ["name", "last_name", "cel_phone", "rol", "email", "password" ];
+    protected $fillable = ["name", "last_name", "phone_number", "role", "email", "password" ];
     protected $hidden = ["password"];
 
     public function codes(){

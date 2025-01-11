@@ -20,7 +20,7 @@ class GuestFactory extends Factory
         return [
             "name" => fake()->name(),
             "last_name" => fake()->lastName(),
-            "cell_phone" => fake()->phoneNumber(),
+            "phone_number" => fake()->phoneNumber(),
             "email" => fake()->safeEmail(),
             "code_id" => Code::inRandomOrder()->first()->id
         ];

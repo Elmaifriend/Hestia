@@ -11,7 +11,7 @@ Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
 
 //--- Usuarios ---
-Route::get("/obtenerCorreos", [UserController::class, "obtenerCorreos"]);
+Route::get("/getAccounts", [UserController::class, "getAccounts"]);
 
 
 

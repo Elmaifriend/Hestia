@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("last_name");
-            $table->string("cell_phone");
+            $table->string("phone_number");
             $table->string("email");
             $table->string("password");
-            $table->enum("rol", ["Administrador", "Residente", "Guardia", "Staff" ] );
+            $table->enum("role", ["Administrador", "Residente", "Guardia", "Staff" ] );
             $table->timestamps();
         });
     }

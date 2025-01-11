@@ -9,14 +9,14 @@ class Code extends Model
 {
     /** @use HasFactory<\Database\Factories\CodigoFactory> */
     use HasFactory;
-    protected $fillable = ["user_id", "code", "subject", "visitants_number",
-        "entry", "description", "status"];
+    protected $fillable = ["user_id", "code", "subject", "visitors_number",
+        "scheduled", "description", "status"];
 
     public function user(){
         return $this->belongsTo(User::class, "user_id");
     }
 
-    public function guest(){
+    public function guests(){
         return $this->hasMany( Guest::class, "code_id" );
     }
 

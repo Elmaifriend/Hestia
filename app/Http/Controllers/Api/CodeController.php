@@ -29,15 +29,20 @@ class CodeController extends Controller
      */
     public function store(Request $request)
     {
-        $codeValidator = Validator::make($request->input("code"), [
+
+        $codeData = $request->input("code") ?? [];
+        $guestData = $request->input("guest") ?? [];
+
+
+        $codeValidator = Validator::make($codeData, [
             "subject" => "required",
-            "number_visitors" => "required",
+            "visitors_number" => "required",
             "entry_date" => "required",
             "entry_time" => "required",
             "description" => "required"
         ]);
 
-        $guestValidator = Validator::make( $request->input("guest"), [
+        $guestValidator = Validator::make( $guestData, [
             "name" => "required",
             "last_name" => "required",
             "phone_number" => "required",
@@ -47,7 +52,7 @@ class CodeController extends Controller
         if( $codeValidator->fails() || $guestValidator->fails() ){
             return response()->json([
                 "message" => "The data is incomplete",
-                "errores" => [ 
+                "errores" => [
                     "code" => $codeValidator->errors(),
                     "guest" => $guestValidator->errors()
                 ]
@@ -57,11 +62,12 @@ class CodeController extends Controller
         $user = $request->user();
 
         $codeData = $codeValidator->validated();
-        $codeData["status"] = "Pending";
+        $codeData["status"] = "Pendiente";
         $codeData["user_id"] = $user->id;
         $codeData["code"] = Str::uuid();
-        $codeData["entry"] = Carbon::createFromFormat('Y-m-d H:i', $codeData["fecha_entrada"] . ' ' . $codeData["hora_entrada"]);
-        $code = code::create($codeData);
+        $codeData["scheduled"] = Carbon::createFromFormat('Y-m-d H:i', $codeData["entry_date"] . ' ' . $codeData["entry_time"]);
+        $codeData["visitors_number"] = $codeData["visitors_number"];
+        $code = Code::create($codeData);
 
         $guestData = $guestValidator->validated();
         $guestData["code_id"] = $code->id;
@@ -88,7 +94,7 @@ class CodeController extends Controller
             ], 401); //Unauthorized
         }
 
-        $guest = Guest::where("code_id", "=", $code->id )->first();
+        $guest = Guest::where("code_id", "=", $code->id )->get();
 
         return response()->json([
             "code" => $code,
@@ -109,15 +115,18 @@ class CodeController extends Controller
             ]);
         }
 
-        $codeValidator = Validator::make($request->input("code"), [
+        $codeData = $request->input("code") ?? [];
+        $guestData = $request->input("guest") ?? [];
+
+        $codeValidator = Validator::make( $codeData, [
             "subject" => "required",
-            "number_visitors" => "required",
+            "visitors_number" => "required",
             "entry_date" => "required",
             "entry_time" => "required",
             "description" => "required"
         ]);
 
-        $guestValidator = Validator::make( $request->input("visitante"), [
+        $guestValidator = Validator::make( $guestData, [
             "name" => "required",
             "last_name" => "required",
             "phone_number" => "required",
@@ -131,25 +140,22 @@ class CodeController extends Controller
             ]);
         }
 
-        $code->guest()->delete();
+        $code->guests()->delete();
         $codeData = $codeValidator->validated();
         $codeData["user_id"] = $user->id;
         $codeData["code"] = Str::uuid();
-        $codeData["entrada"] = Carbon::createFromFormat('Y-m-d H:i', $codeData["fecha_entrada"] . ' ' . $codeData["hora_entrada"]);
+        $codeData["entrada"] = Carbon::createFromFormat('Y-m-d H:i', $codeData["entry_date"] . ' ' . $codeData["entry_time"]);
         $code->update($codeData);
 
 
         $guestData = $guestValidator->validated();
         $guestData["code_id"] = $code->id;
-        $visitante = Guest::create($guestData);
+        $guest = Guest::create($guestData);
 
-
-        $code->guest()->save($visitante);
 
         return response()->json([
-            "message" => "code actualizado correctamente",
-            "code" => $code
-        ], 201);
+            "message" => "code actualizado correctamente"
+        ], 200);
     }
 
     /**
@@ -176,7 +182,7 @@ class CodeController extends Controller
 
     public function scanCode( Request $request ){
 
-        $scannedCode = $request->input("code");
+        $scannedCode = $request->input("code") ?? null;
 
         $code = code::where("code", $scannedCode)->first();
 
@@ -186,13 +192,13 @@ class CodeController extends Controller
                 $message = "Codigo aprobado correctamente";
                 $httpStatus = 201;
                 break;
-            
+
             case "Aprobado":
                 $code->checkExit();
                 $message = "Salida registrada correctamente";
                 $httpStatus = 201;
                 break;
-            
+
             case "Terminado":
                 $message = "Este codigo ya fue utilizado";
                 $httpStatus = 301;
@@ -202,7 +208,7 @@ class CodeController extends Controller
                 $message = "Este codigo fue cancelado";
                 $httpStatus = 301;
                 break;
-            
+
             default:
                 $message = "Codigo no valido";
                 $httpStatus = 301;

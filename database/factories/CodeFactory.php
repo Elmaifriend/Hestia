@@ -21,9 +21,9 @@ class CodeFactory extends Factory
         return [
             "user_id" => User::inRandomOrder()->first()->id,
             "code" => fake()->uuid(),
-            "subjec" => fake()->sentence(),
-            "visitants_number" => fake()->randomDigitNotNull(),
-            "entry" => fake()->dateTimeBetween("-6 months"),
+            "subject" => fake()->sentence(),
+            "visitors_number" => fake()->randomDigitNotNull(),
+            "scheduled" => fake()->dateTimeBetween("-6 months"),
             "description" => fake()->paragraph(2),
             "status" => "Pendiente",
         ];

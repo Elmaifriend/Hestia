@@ -20,10 +20,36 @@ class UserFactory extends Factory
         return [
             "name" => fake()->name(),
             "last_name" => fake()->lastName(),
-            "cell_phone" => fake()->phoneNumber(),
+            "phone_number" => fake()->phoneNumber(),
             "email" => fake()->safeEmail(),
             "password" => Hash::make("contrasena"),
-            "rol" => "Residente",
+            "role" => "Residente",
         ];
     }
+
+    public function setAdminRole(){
+        return $this->state(function(array $attributes){
+            return [
+                "role" => "Administrador"
+            ];
+        });
+    }
+
+    public function setGuardRole(){
+        return $this->state(function(array $attributes){
+            return [
+                "role" => "Guardia"
+            ];
+        });
+    }
+
+    public function setStaffRole(){
+        return $this->state(function(array $attributes){
+            return [
+                "role" => "Staff"
+            ];
+        });
+    }
+
+
 }

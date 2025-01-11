@@ -9,7 +9,7 @@ class Guest extends Model
 {
     /** @use HasFactory<\Database\Factories\VisitanteFactory> */
     use HasFactory;
-    protected $fillable = ["code_id", "name", "last_name", "cell_phone", "email"];
+    protected $fillable = ["code_id", "name", "last_name", "phone_number", "email"];
 
     public function code(){
         return $this->belongsTo(Code::class, "code_id");

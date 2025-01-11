@@ -64,13 +64,13 @@ class UserController extends Controller
         //
     }
 
-    public function obtenerCorreos(){
-        $correos = User::all(["correo"]);
+    public function getAccounts(){
+        $email = User::all(["email", "role"]);
 
         return response()->json([
-            "correos" => $correos,
-            "contrasena" => [
-                "para todos es 'contrasena' "
+            "email" => $email,
+            "password" => [
+                "Para todos es 'contrasena' "
             ]
         ] );
     }

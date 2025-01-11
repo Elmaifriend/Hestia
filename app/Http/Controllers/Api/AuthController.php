@@ -16,25 +16,26 @@ class AuthController extends Controller
         $fields = $request->validate([
             "name" => "required|string",
             "last_name" => "required|string",
-            "cell_phone" => "required|string",
-            "email" => "required|string|unique:usuarios,correo",
+            "phone_number" => "required|string",
+            "email" => "required|string|unique:users,email",
             "password" => "required|confirmed|min:8|string",
             "password_confirmation" => "required|min:8|string"
         ]);
 
-        $usuario = User::create([
+        $user = User::create([
             "name" => $fields["name"],
             "last_name" => $fields["last_name"],
-            "cell_phone" => $fields["cell_phone"],
+            "phone_number" => $fields["phone_number"],
             "email" => $fields["email"],
             "password" => Hash::make( $fields["password"] ),
-            "rol" => "Residente"
+            "role" => "Residente"
         ]);
 
-        $token = $usuario->createToken("hestia_app")->plainTextToken;
+        $token = $user->createToken("hestia_app")->plainTextToken;
 
         return response()->json([
-            "user" => $usuario,
+            "message" => "Registrado correctamente",
+            "user" => $user,
             "token" => $token
         ]);
     }
@@ -46,7 +47,7 @@ class AuthController extends Controller
             "password" => "string|required"
         ]);
 
-        $user = User::where("correo", "=", $fields["correo"])->first();
+        $user = User::where("email", "=", $fields["email"])->first();
 
         if( !$user || !Hash::check( $fields["password"], $user->password ) ){
             return response([

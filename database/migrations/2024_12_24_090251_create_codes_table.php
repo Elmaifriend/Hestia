@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string("subject");
             $table->tinyInteger("visitors_number");
             $table->dateTime("scheduled");
-            $table->dateTime("entry_check");
-            $table->datetimes("exit_check");
-            $table->tinyText("descripcion");
-            $table->enum("status", ["Aprobado", "Pendiente", "Terminado", "Cancelado" ] );
+            $table->dateTime("entry_check")->nullable();
+            $table->datetime("exit_check")->nullable();
+            $table->tinyText("description");
+            $table->enum("status", [ "Pendiente", "Aprobado", "Terminado", "Cancelado" ] );
             $table->timestamps();
 
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
