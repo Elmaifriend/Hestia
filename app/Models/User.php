@@ -24,4 +24,8 @@ class User extends Authenticatable
     public function resident(){
         return $this->hasOne(Resident::class, "user_id");
     }
+
+    public function maintenance(){
+        return $this->hasMany(Maintenance::class, "user_id");
+    }
 }
