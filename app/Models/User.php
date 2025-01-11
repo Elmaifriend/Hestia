@@ -14,6 +14,14 @@ class User extends Authenticatable
     protected $hidden = ["password"];
 
     public function codes(){
-        return $this->hasMany( Code::class, "usuario_id");
+        return $this->hasMany( Code::class, "user_id");
+    }
+
+    public function residentials(){
+        return $this->hasMany(Residential::class, "user_id");
+    }
+
+    public function resident(){
+        return $this->hasOne(Resident::class, "user_id");
     }
 }
