@@ -10,7 +10,7 @@ class Resident extends Model
     /** @use HasFactory<\Database\Factories\ResidentFactory> */
     use HasFactory;
 
-    protected $fillable = ["user_id", "ownership", "status"];
+    protected $fillable = [ "house_id", "user_id", "ownership", "status"];
 
     public function house(){
         return $this->belongsTo(House::class, "house_id");

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Resident;
 use App\Models\Residential;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class ResidentialController extends Controller
@@ -16,15 +15,13 @@ class ResidentialController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $user = request()->user();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+        $residentials = $user->residentials();
 
+        return response()->json([
+            "residentials" => $residentials
+        ]);
     }
 
     /**
@@ -75,14 +72,6 @@ class ResidentialController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -101,7 +90,7 @@ class ResidentialController extends Controller
 
         $residential = Residential::find($id);
         $user = $request->user();
-        
+
         if( $user->id != $residential->manager_id ){
             return response()->json([
                 "message" => "No tienes acceso a estos datos"
@@ -134,6 +123,6 @@ class ResidentialController extends Controller
         $residential->delete();
         return response()->json([
             "message" => "Eliminado correctamente"
-        ]); 
+        ]);
     }
 }
