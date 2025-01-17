@@ -28,4 +28,8 @@ class User extends Authenticatable
     public function maintenance(){
         return $this->hasMany(Maintenance::class, "user_id");
     }
+
+    public function amenitiesReservations(){
+        return $this->hasMany(AmenityReservation::class, "user_id");
+    }
 }

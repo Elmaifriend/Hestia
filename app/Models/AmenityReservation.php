@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class AmenityReservation extends Model
 {
     /** @use HasFactory<\Database\Factories\AmenityReservationFactory> */
@@ -18,5 +19,10 @@ class AmenityReservation extends Model
                             "scheduled_exit_time",
                             "note"
                         ];
+
+
+    public function user(){
+        return $this->belongsTo(User::class, "user_id");
+    }
 }
 
