@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date("scheduled_entry_day");
             $table->time("scheduled_entry_time");
             $table->time("scheduled_exit_time");
-            $table->string("note");
+            $table->text("note");
             $table->timestamps();
 
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();

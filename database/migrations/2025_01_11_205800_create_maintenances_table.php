@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id")->index();
             $table->string("title");
-            $table->string("description");
+            $table->text("description");
             $table->enum("status", [ "En Revision", "Aceptado", "En Proceso", "Terminado", "Cancelado" ]);
             $table->string("evidence")->nullable();
             $table->timestamps();

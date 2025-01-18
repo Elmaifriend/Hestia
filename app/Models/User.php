@@ -25,7 +25,7 @@ class User extends Authenticatable
         return $this->hasOne(Resident::class, "user_id");
     }
 
-    public function maintenance(){
+    public function maintenanceRequests(){
         return $this->hasMany(Maintenance::class, "user_id");
     }
 

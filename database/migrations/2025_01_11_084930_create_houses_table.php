@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger("owner_id")->index();
             $table->string("house_number");
             $table->enum("status", ["Disponible", "Mantenimiento", "Habitada"]);
-            $table->string("description");
+            $table->text("description");
             $table->timestamps();
 
             $table->foreign("residential_id")->references("id")->on("residentials")->cascadeOnDelete();

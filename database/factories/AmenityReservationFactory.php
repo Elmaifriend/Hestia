@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Amenity;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,8 +22,8 @@ class AmenityReservationFactory extends Factory
         $entry_time = fake()->time();
 
         return [
-            "user_id" => 0,
-            "amenity_id" => 0,
+            "user_id" => User::inrandomOrder()->first()->id,
+            "amenity_id" => Amenity::inRandomOrder()->first()->id,
             "scheduled_entry_day" => $date,
             "scheduled_entry_time" => $entry_time,
             "scheduled_exit_time" => fake()->time($entry_time, "+2 hours"),

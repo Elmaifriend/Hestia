@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger("manager_id")->index();
             $table->string("name");
             $table->string("address");
-            $table->string("desciption");
+            $table->string("description");
             $table->timestamps();
 
-            $table->foreing("manager_id")->references("id")->on("users")->cascadeOnDelete();
+            $table->foreign("manager_id")->references("id")->on("users")->cascadeOnDelete();
         });
     }
 

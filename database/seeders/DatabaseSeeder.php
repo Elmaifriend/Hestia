@@ -2,11 +2,18 @@
 
 namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Amenity;
+use App\Models\AmenityReservation;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
 use App\Models\Guest;
 use App\Models\Code;
+use App\Models\House;
+use App\Models\Maintenance;
+use App\Models\Resident;
+use App\Models\Residential;
 
 class DatabaseSeeder extends Seeder
 {
@@ -81,5 +88,13 @@ class DatabaseSeeder extends Seeder
                 });
             });
         });
+
+        Residential::factory(10)->create();
+        House::factory(1000)->create();
+        Resident::factory(3000)->create();
+        Maintenance::factory(4000)->create();
+        Amenity::factory(10)->create();
+        AmenityReservation::factory(1000)->create();
+
     }
 }

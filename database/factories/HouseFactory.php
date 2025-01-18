@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Residential;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +19,9 @@ class HouseFactory extends Factory
     public function definition(): array
     {
         return [
-            "residential_id" => 0,
-            "owner_id" => 0,
-            "house_number" => "#" . fake()->numberBetween(1, 10),
+            "residential_id" => Residential::inRandomOrder()->first()->id,
+            "owner_id" => User::inRandomOrder()->first()->id,
+            "house_number" => "#" . fake()->numberBetween(1, 200),
             "status" => "Habitada",
             "description" => fake()->paragraph()
         ];
