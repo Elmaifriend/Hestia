@@ -36,7 +36,7 @@ Route::group(["middleware"=>["auth:sanctum"]], function(){
 
     // --- Amenities ---
     //        NOTE: dont use, we populated the database manually,
-    //        but in future it will be util
+    //        but in future the end-point will be util
     Route::get("/amenities", [AmenityController::class], "index");
     Route::post("/amenity", [AmenityController::class], "store");
     Route::get("/amenity/{Amenity}", [AmenityController::class], "show");
@@ -45,7 +45,7 @@ Route::group(["middleware"=>["auth:sanctum"]], function(){
 
 
     // --- Amenity Reservations ---
-    Route::get("/amenities/reservations", [AmenityReservationController::class, "index"]);
+    Route::get("/amenity/reservations", [AmenityReservationController::class, "index"]);
     Route::post("/amenity/reservation", [AmenityReservationController::class, "store"]);
     Route::get("/amenity/reservation/{AmenityReservation}", [AmenityReservationController::class, "show"]);
     Route::put("/amenity/reservation/{AmenityReservation}", [AmenityReservationController::class, "update"]);
