@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Amenities;
 use App\Models\AmenityReservation;
+use Illuminate\Support\Facades\DB;
 
+use function PHPSTORM_META\map;
 
 class AmenityReservationController extends Controller
 {
@@ -17,7 +19,7 @@ class AmenityReservationController extends Controller
     public function index()
     {
         $user = request()->user();
-        $amenitiesReservations = $user->amenitiesReservations();
+        $amenitiesReservations = $user->amenitiesReservations()->get();
 
         return response()->json([
             "amenities_reservations" => $amenitiesReservations
@@ -29,7 +31,7 @@ class AmenityReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $amenityReservationValidator = Validator::make( $request, [
+        $amenityReservationValidator = Validator::make( $request->all(), [
             "amenity_id" => "required|integer",
             "scheduled_entry_day" => "required|date",
             "scheduled_entry_time" => "required",
@@ -37,7 +39,7 @@ class AmenityReservationController extends Controller
             "note" => "string"
         ]);
 
-        if( $amenityReservationValidator->failes()){
+        if( $amenityReservationValidator->fails()){
             return response()->json([
                 "message" => "Falta informacion",
                 "errors" => $amenityReservationValidator->errors()
@@ -45,10 +47,12 @@ class AmenityReservationController extends Controller
         }
 
         $amenityReservationData = $amenityReservationValidator->validated();
-        $amenityReservation = AmenityReservation::created($amenityReservationData);
+        $amenityReservationData["user_id"] = $request->user()->id;
+        $amenityReservation = AmenityReservation::create($amenityReservationData);
 
         return response()->json([
-            "message" => "Resevado correctamente"
+            "message" => "Resevado correctamente",
+            "amenity_reservation" => $amenityReservation
         ]);
     }
 

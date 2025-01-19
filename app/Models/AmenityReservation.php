@@ -11,6 +11,8 @@ class AmenityReservation extends Model
     /** @use HasFactory<\Database\Factories\AmenityReservationFactory> */
     use HasFactory;
 
+    protected $table = "amenity_reservations";
+
     protected $fillable = [
                             "user_id",
                             "amenity_id",
