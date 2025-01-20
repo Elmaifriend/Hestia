@@ -1,0 +1,19 @@
+meta {
+  name: Show one reservation
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://127.0.0.1:8000/api/amenity/reservation/1002
+  body: json
+  auth: bearer
+}
+
+headers {
+  content-type: application/json
+}
+
+auth:bearer {
+  token: 5|tyskBwJlKEyx6YwuYbY6EMVbPBkxpSXwJrYGRNYa269b4d10
+}

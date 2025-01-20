@@ -6,9 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CodeController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AmenityController;
-
 use App\Http\Controllers\Api\AmenityReservationController;
-
+use App\Http\Controllers\Api\MaintenanceController;
 
 //--- Auth ---
 Route::post("/register", [AuthController::class, "register"]);
@@ -37,17 +36,25 @@ Route::group(["middleware"=>["auth:sanctum"]], function(){
     // --- Amenities ---
     //        NOTE: dont use, we populated the database manually,
     //        but in future the end-point will be util
-    Route::get("/amenities", [AmenityController::class], "index");
-    Route::post("/amenity", [AmenityController::class], "store");
-    Route::get("/amenity/{Amenity}", [AmenityController::class], "show");
-    Route::put("/amenity/{Amenity}", [AmenityController::class], "update");
-    Route::delete("/amenity/{Amenity}", [AmenityController::class], "destroy");
+    Route::get("/amenities", [AmenityController::class, "index"]);
+    Route::post("/amenity", [AmenityController::class, "store"]);
+    Route::get("/amenity/{amenity}", [AmenityController::class, "show"]);
+    Route::put("/amenity/{amenity}", [AmenityController::class, "update"]);
+    Route::delete("/amenity/{amenity}", [AmenityController::class, "destroy"]);
 
 
     // --- Amenity Reservations ---
-    Route::get("/amenity/reservations", [AmenityReservationController::class, "index"]);
+    Route::get("/amenities/reservations", [AmenityReservationController::class, "index"]);
     Route::post("/amenity/reservation", [AmenityReservationController::class, "store"]);
-    Route::get("/amenity/reservation/{AmenityReservation}", [AmenityReservationController::class, "show"]);
-    Route::put("/amenity/reservation/{AmenityReservation}", [AmenityReservationController::class, "update"]);
-    Route::delete("/amenity/reservation/{AmenityReservation}", [AmenityReservationController::class, "destroy"]);
+    Route::get("/amenity/reservation/{amenityReservation}", [AmenityReservationController::class, "show"]);
+    Route::put("/amenity/reservation/{amenityReservation}", [AmenityReservationController::class, "update"]);
+    Route::delete("/amenity/reservation/{amenityReservation}", [AmenityReservationController::class, "destroy"]);
+
+
+    // --- Maintenance ---
+    Route::get("/maintenance/requests", [MaintenanceController::class, "index"]);
+    Route::post("/maintenance/request", [MaintenanceController::class, "store"]);
+    Route::get("/maintenance/request/{maintenance}", [MaintenanceController::class, "show"]);
+    Route::put("/maintenance/request/{maintenance}", [MaintenanceController::class, "update"]);
+    Route::delete("/maintenance/request/{maintenance}", [MaintenanceController::class, "destroy"]);
 });

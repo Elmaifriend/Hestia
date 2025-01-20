@@ -1,0 +1,25 @@
+meta {
+  name: Escanear
+  type: http
+  seq: 8
+}
+
+put {
+  url: http://127.0.0.1:8000/api/code/scan
+  body: json
+  auth: bearer
+}
+
+headers {
+  content-type: application/json
+}
+
+auth:bearer {
+  token: 2|22zGDK48lptOqplXx3LogHSrwfg5qDZ3T6F5mgeO94ae9eaa
+}
+
+body:json {
+  {
+    "code": "bf184b98-7fc6-4875-9db5-4b2f459e00b1"
+  }
+}

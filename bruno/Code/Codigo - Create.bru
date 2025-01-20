@@ -1,0 +1,37 @@
+meta {
+  name: Codigo - Create
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://127.0.0.1:8000/api/code
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 2|22zGDK48lptOqplXx3LogHSrwfg5qDZ3T6F5mgeO94ae9eaa
+}
+
+body:json {
+  {
+    "code": {
+      "subject": "test",
+      "visitors_number": 2,
+      "entry_date": "2023-04-04",
+      "entry_time": "14:00",
+      "description": "test test test"
+    },
+    "guest": {
+      "name": "juan",
+      "last_name": "juancho",
+      "phone_number": "1234567",
+      "email": "correo@correo.com"
+    }
+  }
+}
+
+body:multipart-form {
+  : 
+}

@@ -16,10 +16,10 @@ class MaintenanceController extends Controller
     public function index()
     {
         $user = request()->user();
-        $maintenanceRequestList = $user->maintenance();
+        $maintenanceRequestList = $user->maintenanceRequests()->get();
 
         return response()->json([
-            "maintenance" => $maintenanceRequestList
+            "maintenance_requests" => $maintenanceRequestList
         ]);
     }
 
@@ -28,7 +28,7 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
-        $maintenanceRequestValidator = Validator::make($request,[
+        $maintenanceRequestValidator = Validator::make($request->all(),[
             "title" => "string|required|min:8",
             "description" => "string|required|min:20"
         ]);
@@ -78,7 +78,7 @@ class MaintenanceController extends Controller
      */
     public function update(Request $request, Maintenance $maintenance)
     {
-        $maintenanceRequestValidator = Validator::make($request,[
+        $maintenanceRequestValidator = Validator::make($request->all(),[
             "title" => "string|required|min:8",
             "description" => "string|required|min:20"
         ]);

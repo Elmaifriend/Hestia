@@ -1,0 +1,22 @@
+meta {
+  name: Create Request
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://127.0.0.1:8000/api/maintenance/request
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: j8gcaxJtKnJnXjUX3M1FQYJ7pPoEHJI5v0O7HBTo0d92a380
+}
+
+body:json {
+  {
+    "title" : "Esta es una prube para crear una solicitud de mantenimeinto",
+    "description" : "Esta prueba tiene la finalidad de probar el correcto funcionameinto del end-point para la creacion de solicitudes"
+  }
+}

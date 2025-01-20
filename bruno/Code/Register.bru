@@ -1,0 +1,22 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:8000/api/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Juan",
+    "last_name": "Pérez",
+    "phone_number": "1234567890",
+    "email": "juan.perez@example.com",
+    "password": "contrasena",
+    "password_confirmation": "contrasena"
+  }
+}

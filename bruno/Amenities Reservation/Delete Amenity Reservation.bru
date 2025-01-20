@@ -1,0 +1,25 @@
+meta {
+  name: Delete Amenity Reservation
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://127.0.0.1:8000/api/amenity/reservation/1002
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 0oup5qwqTrDvuSuxVNE1vAKubJIZl6vnXmfTXkQCd98add43
+}
+
+body:json {
+  {
+    "amenity_id": 2,
+    "scheduled_entry_day": "2025-01-25",
+    "scheduled_entry_time": "14:00:00",
+    "scheduled_exit_time": "16:00:00",
+    "note": "Reservación para evento especial | Modificado"
+  }
+}

@@ -1,0 +1,16 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://127.0.0.1:8000/api/login
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  email: jeremy67@example.net
+  password: contrasena
+}

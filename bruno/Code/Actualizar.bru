@@ -1,0 +1,33 @@
+meta {
+  name: Actualizar
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://127.0.0.1:8000/api/code/106
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 2|22zGDK48lptOqplXx3LogHSrwfg5qDZ3T6F5mgeO94ae9eaa
+}
+
+body:json {
+  {
+    "code": {
+      "subject": "Este es un ejemplo de update",
+      "visitors_number": 4,
+      "entry_date": "2024-04-04",
+      "entry_time": "16:00",
+      "description": "Queremos confirmar el correcto funcionamiento del endpoint"
+    },
+    "guest": {
+      "name": "Un visitante",
+      "last_name": "Random",
+      "phone_number": "1234567",
+      "email": "correo@correo.com"
+    }
+  }
+}
